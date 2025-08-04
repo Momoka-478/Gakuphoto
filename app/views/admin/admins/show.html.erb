@@ -1,0 +1,19 @@
+<div>
+  <h3><%= @admin.name %></h3>
+  <%= image_tag @admin.get_profile_image(100,100) %>
+  <% if @admin == current_admin.id %>
+    <p><%= link_to "プロフィール編集", edit_admin_path(@admin) %></p>
+  <% end %>
+</div>
+
+<% @posts.each do |post| %>
+<div>
+  <%= link_to post_path(post.id) do %>
+    <%= image_tag post.get_image %>
+  <% end %>
+  <p>投稿ユーザー画像：<%= image_tag post.admin.get_profile_image(100,100) %></p>
+  <p>タイトル：<%= post.title %></p>
+  <p>一言：<%= post.body %></p>
+  <p>投稿者：<%= post.admin.name %></p>
+</div>
+<% end %>
