@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2025_08_04_121439) do
   end
 
   create_table "admins", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 2025_08_04_121439) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "admin_id"
     t.string "title"
     t.string "body"
     t.datetime "created_at", precision: 6, null: false
