@@ -13,6 +13,13 @@ class UsersController < ApplicationController
     redirect_to user_path(user.id)
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = 'ユーザーを削除しました。'
+    redirect_to :root
+  end
+
 
   private
 
