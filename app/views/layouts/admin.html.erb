@@ -4,23 +4,31 @@
   <title>Admin - Gakuphoto</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-  <% if admin_signed_in? %>>
-    <div class="text-right">
-      <li>
-        <%= link_to '投稿フォーム', new_post_path %>
-      </li>
-      <li>
-        <%= link_to 'マイページ', admin_admin_path(current_admin.id) %>
-      </li>
-      <li>
-        <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
-      </li>
-    </div>
-  <% end %>
+  <header>
+    <% if admin_signed_in? %>
+      <nav>
+        <ul>
+          <li>
+            <%= link_to '投稿フォーム', new_post_path %>
+          </li>
+          <li>
+            <%= link_to 'マイページ', admin_admin_path(current_admin.id) %>
+          </li>
+          <li>
+            <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete %>
+          </li>
+        </ul>
+      </nav>
+    <% end %>
+  </header>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <main>
   <%= yield %>
+  </main>
 </body>
 </html>
