@@ -9,13 +9,14 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:destroy]
-    resources :admins, only: [:show, :edit, :update]
+    resources :admins, only: [:show]
   end
 
-  devise_for :users
-
-  root to: "homes#top"
-  get 'about', to: 'homes#about', as: :about
-  resources :users, only: [:show, :edit, :update, :destroy]
+  scope module: :public do
+    devise_for :users
+    root to: "homes#top"
+    get 'about', to: 'homes#about', as: :about
+    resources :users, only: [:show, :edit, :update, :destroy]
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

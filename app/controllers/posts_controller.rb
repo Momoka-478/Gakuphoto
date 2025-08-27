@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-
-  before_action :authenticate_admin!, except: [:index, :show]
+  layout 'admin'
+  before_action :authenticate_admin!
 
   def new
     @post = Post.new
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.admin_id = current_admin.id
     if @post.save
-      redirect_to posts_path
+      redirect_to post_path(post.id)
     else
       render :new
     end

@@ -1,8 +1,8 @@
 <% @posts.each do |post| %>
   <div>
-  <%= link_to post_path(post.id) do %>
-    <%= image_tag post.get_image %>
-  <% end %>
+    <%= link_to post_path(post.id) do %>
+      <%= image_tag post.get_image %>
+    <% end %>
     <p>タイトル：<%= post.title %></p>
     <p>一言：<%= post.body %></p>
     <p>投稿者：<%= post.admin.name %></p>
