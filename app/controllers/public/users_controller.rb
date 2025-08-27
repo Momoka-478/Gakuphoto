@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
@@ -9,8 +9,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(current_user.id)
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      flash.now[:notice] = "編集に失敗しました。"
+      render 'edit'
+    end
   end
 
   def destroy
