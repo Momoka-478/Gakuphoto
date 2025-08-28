@@ -5,6 +5,10 @@
   <% end %>
     <p>タイトル：<%= post.title %></p>
     <p>一言：<%= post.body %></p>
-    <p>投稿者：<%= post.admin.name %></p>
+    <p>投稿者：
+      <%= link_to admin_admin_path(post.admin.id) do %>
+        <%= post.admin.name %>
+      <% end %>
+    </p>
   </div>
 <% end %>

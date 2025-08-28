@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_admin!, except: [:index, :show]
+  before_action :authenticate_admin!
+  layout 'admin'
 
   def new
     @post = Post.new
@@ -36,18 +37,11 @@ class PostsController < ApplicationController
 
   def destroy
     post = Post.find(params[:id])
-    post_destroy
-    redirect_to '/posts'
+    post.destroy
+    redirect_to posts_path
   end
 
   private
-
-  def change_layout
-    case action_name
-    when 'new', 'create', 'destroy'
-      'admin'
-    end
-  end
 
   def post_params
     params.require(:post).permit(:image, :title, :body)
