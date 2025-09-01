@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:index, :show] do
+    resources :favorite, only: [:create, :destroy]
+  end
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
