@@ -5,12 +5,13 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :posts, only: [:index, :show]
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:destroy]
+    resources :users, only: [:index, :destroy]
     resources :admins, only: [:show, :edit, :update]
+    resources :posts
   end
 
   devise_for :users

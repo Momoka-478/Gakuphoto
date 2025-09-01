@@ -1,22 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :authenticate_admin!
-  layout 'admin'
-
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @post = Post.new(post_params)
-    @post.admin_id = current_admin.id
-    if @post.save
-      redirect_to posts_path
-    else
-      render :new
-    end
-  end
-
+  before_action :authenticate_any!, only: [:index, :show]
   def index
     @posts = Post.all
   end
@@ -25,25 +9,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def edit
-    @post = Post.find(params[:id])
-  end
-
-  def update
-    post = Post.find(params[:id])
-    post.update(post_params)
-    redirect_to post_path(post.id)
-  end
-
-  def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    redirect_to posts_path
-  end
-
   private
 
-  def post_params
-    params.require(:post).permit(:image, :title, :body)
+  def authenticate_any!
+    unless admin_signed_in? || user_signed_in?
+      redirect_to new_user_session_path, alert: "ログインしてください"
+    end
   end
 end
