@@ -6,19 +6,18 @@
 </div>
 
 <h2>いいねした投稿一覧</h2>
-<% @favorite_posts.each do |post| %>
-  <div>
-  <%= link_to post_path(post.id) do %>
-    <%= image_tag post.get_image %>
-  <% end %>
-    <p>タイトル：<%= post.title %></p>
-    <p>一言：<%= post.body %></p>
-    <p>投稿者：
-      <%= link_to admin_admin_path(post.admin.id) do %>
-        <%= post.admin.name %>
-      <% end %>
-    </p>
-  </div>
+<% if @favorite_posts.any? %>
+  <ul>
+    <% @favorite_posts.each do |post| %>
+      <li>
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>まだいいねした投稿はありません</p>
 <% end %>
 
 <% if user_signed_in? && @user == current_user %>

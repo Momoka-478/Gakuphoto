@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def show
-    @user = User.find(params[:id])
+    @user = current_user
+    @favorite_posts = @user.favorite_posts.includes(:favorites)
   end
 
   def edit
