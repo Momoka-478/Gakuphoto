@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
 
+  get 'admins/show'
   get 'searches/search'
   devise_for :admin, skip: [:registrations, :password], controllers: {
     sessions: 'admin/sessions'
   }
 
   resources :posts, only: [:index, :show]
+
+  resources :admins, only: [:show]
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'

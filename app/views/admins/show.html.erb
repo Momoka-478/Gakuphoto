@@ -1,13 +1,10 @@
 <div>
   <h3><%= @admin.name %></h3>
-  <% if admin_signed_in? && @admin == current_admin %>
-    <p><%= link_to "プロフィール編集", edit_admin_admin_path(@admin) %></p>
-  <% end %>
 </div>
 
 <% @posts.each do |post| %>
 <div>
-  <%= link_to admin_post_path(post.id) do %>
+  <%= link_to post_path(post.id) do %>
     <%= image_tag post.get_image %>
   <% end %>
   <p>タイトル：<%= post.title %></p>

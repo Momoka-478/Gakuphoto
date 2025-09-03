@@ -2,10 +2,14 @@
   <%= image_tag @post.get_image %>
   <p>タイトル：<%= @post.title %></p>
   <p>一言：<%= @post.body %></p>
-  <p>投稿者：<%= @post.admin.name %></p>
+  <p>投稿者：
+  <%= link_to admin_admin_path(post.admin.id) do %>
+    <%= post.admin.name %>
+  <% end %>
+  </p>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
   <% if @post.admin == current_admin %>
     <%= link_to "編集", edit_admin_post_path(@post.id) %>
-    <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>
