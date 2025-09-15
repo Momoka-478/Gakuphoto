@@ -21,8 +21,19 @@ momoka = Admin.find_or_create_by!(email: "momoka@example.com") do |admin|
   admin.password = "pass1234"
 end
 
+tomoaki = Admin.find_or_create_by!(email: "tomoaki@example.com") do |admin|
+  admin.name = "Tomoaki"
+  admin.password = "pass1234"
+end
+
 Post.find_or_create_by!(title: "教室内") do |post_image|
   post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
   post_image.body = "きれいに掃除をしました。"
   post_image.admin = momoka
+end
+
+Post.find_or_create_by!(title: "体育祭") do |post_image|
+  post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")
+  post_image.body = "1年生は玉入れで活躍しました。"
+  post_image.admin = tomoaki
 end
