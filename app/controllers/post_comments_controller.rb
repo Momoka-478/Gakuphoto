@@ -1,6 +1,4 @@
-class Admin::PostCommentsController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
+class PostCommentsController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])

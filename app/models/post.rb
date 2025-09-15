@@ -2,7 +2,7 @@ class Post < ApplicationRecord
 
   has_one_attached :image
   has_many :favorites, dependent: :destroy
-  has_many :admins, through: :comments
+  has_many :post_comments, dependent: :destroy
   belongs_to :admin
 
   validates :title, presence: true

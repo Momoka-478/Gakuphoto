@@ -13,7 +13,7 @@
   <% else %>
     <%= button_to "いいね", post_favorite_path(@post), method: :post %>
   <% end %>
-  <p>コメント数: <%= post.comments.count %></p>
+  <p>コメント数: <%= @post.post_comments.count %></p>
 
-  <%= render "comments/index", post: @post %>
+  <%= render "post_comments/index", post: @post %>
 </div>
