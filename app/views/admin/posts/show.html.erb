@@ -8,4 +8,8 @@
     <%= link_to "編集", edit_admin_post_path(@post.id) %>
     <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
+  <p>コメント数: <%= post.comments.count %></p>
+
+  <%= render "comments/index", post: @post %>
+  <%= render "comments/form", post: @post, comment: @comment %>
 </div>

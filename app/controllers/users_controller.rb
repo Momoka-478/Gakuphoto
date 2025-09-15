@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @favorite_posts = @user.favorite_posts.includes(:favorites)
+    @post = Post.find(params[:id])
   end
 
   def edit

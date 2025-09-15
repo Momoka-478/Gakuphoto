@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:index, :destroy]
     resources :admins, only: [:show, :edit, :update]
-    resources :posts
+    resources :posts, only: [:index, :show, :edit, :create, :destroy, :update] do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
   devise_for :users
