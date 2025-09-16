@@ -10,6 +10,6 @@
   <% end %>
   <p>コメント数: <%= @post.post_comments.count %></p>
 
-  <%= render "post_comments/index", post: @post %>
-  <%= render "post_comments/form", post: @post, post_comment: @post_comment %>
+  <%= render "admin/post_comments/index", post: @post %>
+  <%= render "admin/post_comments/form", post: @post, post_comment: @post_comment %>
 </div>

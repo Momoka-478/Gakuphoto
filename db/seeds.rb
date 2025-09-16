@@ -5,3 +5,35 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+maki = User.find_or_create_by!(email: "maki@example.com") do |user|
+  user.name = "Maki"
+  user.password = "password"
+end
+
+ichiro = User.find_or_create_by!(email: "ichiro@example.com") do |user|
+  user.name = "Ichiro"
+  user.password = "password"
+end
+
+momoka = Admin.find_or_create_by!(email: "momoka@example.com") do |admin|
+  admin.name = "Momoka"
+  admin.password = "pass1234"
+end
+
+tomoaki = Admin.find_or_create_by!(email: "tomoaki@example.com") do |admin|
+  admin.name = "Tomoaki"
+  admin.password = "pass1234"
+end
+
+Post.find_or_create_by!(title: "教室内") do |post_image|
+  post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")
+  post_image.body = "きれいに掃除をしました。"
+  post_image.admin = momoka
+end
+
+Post.find_or_create_by!(title: "体育祭") do |post_image|
+  post_image.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")
+  post_image.body = "1年生は玉入れで活躍しました。"
+  post_image.admin = tomoaki
+end
