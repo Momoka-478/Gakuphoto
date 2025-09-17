@@ -11,7 +11,7 @@
         <td><%= post_comment.comment %></td>
         <td>
           <% if post_comment.admin == current_admin %>
-            <%= link_to "Destroy", post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+            <%= link_to "Destroy", admin_post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
           <% end %>
         </td>
       </tr>

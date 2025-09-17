@@ -4,15 +4,15 @@ class Admin::PostCommentsController < ApplicationController
 
   def create
     post = Post.find(params[:post_id])
-    comment = current_user.post_comments.new(post_comment_params)
+    comment = current_admin.post_comments.new(post_comment_params)
     comment.post_id = post.id
     if comment.save
-      redirect_to admin_post_path(@post)
+      redirect_to admin_post_path(post)
     end
   end
 
   def destroy
-    Comment.find_by(id: params[:id], post_id: params[:post_id]).destroy
+    PostComment.find_by(id: params[:id], post_id: params[:post_id]).destroy
     redirect_to request.referer
   end
 
