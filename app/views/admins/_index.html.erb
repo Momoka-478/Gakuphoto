@@ -1,0 +1,6 @@
+<% admins.each do |admin| %>
+  <tr>
+    <td><%= admin.name %></td>
+    <td><%= link_to 'Show', admin, class: "admin_#{admin.id}" %></td>
+  </tr>
+<% end %>

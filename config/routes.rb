@@ -6,15 +6,13 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  resources :posts, only: [:index, :show] do
-    resources :favorite, only: [:create, :destroy]
-  end
+  resources :posts, only: [:index, :show]
 
-  resources :admins, only: [:show]
+  resources :admins, only: [:index, :show]
 
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:index, :show, :destroy]
     resources :admins, only: [:show, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :new, :create, :destroy, :update] do
       resources :post_comments, only: [:create, :destroy]

@@ -9,9 +9,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def favorite_posts
-    @favorite_posts = current_user.favorites.map(&:post)
-  end
 
   private
 
