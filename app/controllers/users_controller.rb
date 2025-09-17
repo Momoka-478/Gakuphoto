@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def show
-    @user = User.find(params[:id])
+    @user = current_user
+    @favorite_posts = @user.favorite_posts.includes(:favorites)
+    @post = Post.find(params[:id])
   end
 
   def edit
@@ -21,6 +23,9 @@ class UsersController < ApplicationController
     redirect_to new_user_registration_path
   end
 
+  def favorite_posts
+    @favorite_posts = current_user.favorites.map(&:post)
+  end
 
   private
 

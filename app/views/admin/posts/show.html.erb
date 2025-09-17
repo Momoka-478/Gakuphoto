@@ -12,4 +12,8 @@
     <%= link_to "編集", edit_admin_post_path(@post.id) %>
     <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
+  <p>コメント数: <%= @post.post_comments.count %></p>
+
+  <%= render "admin/post_comments/index", post: @post %>
+  <%= render "admin/post_comments/form", post: @post, post_comment: @post_comment %>
 </div>

@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:index, :show] do
+    resources :favorite, only: [:create, :destroy]
+  end
 
   resources :admins, only: [:show]
 
@@ -14,7 +16,9 @@ Rails.application.routes.draw do
     get 'dashboards', to: 'dashboards#index'
     resources :users, only: [:index, :destroy]
     resources :admins, only: [:show, :edit, :update]
-    resources :posts
+    resources :posts, only: [:index, :show, :edit, :new, :create, :destroy, :update] do
+      resources :post_comments, only: [:create, :destroy]
+    end
   end
 
   devise_for :users
