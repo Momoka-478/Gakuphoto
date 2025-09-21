@@ -7,7 +7,7 @@
 
 <% @posts.each do |post| %>
 <div>
-  <%= link_to admin_post_path(post.id) do %>
+  <%= link_to admin_post_path(post) do %>
     <%= image_tag post.get_image %>
   <% end %>
   <p>タイトル：<%= post.title %></p>
