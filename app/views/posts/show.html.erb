@@ -1,19 +1,24 @@
 <div>
-  <%= image_tag @post.get_image %>
-  <p>タイトル：<%= @post.title %></p>
-  <p>一言：<%= @post.body %></p>
-  <p>投稿者：
-  <%= link_to admin_path(@post.admin.id) do %>
-    <%= @post.admin.name %>
-  <% end %>
-  </p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.admin == current_admin %>
-    <%= link_to "編集", edit_admin_post_path(@post.id) %>
-    <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
-
-  <p>コメント数: <%= @post.post_comments.count %></p>
+  <table>
+    <tr>
+      <td><%= image_tag @post.get_image %></td>
+      <td>タイトル：<%= @post.title %></td>
+      <td>一言：<%= @post.body %></td>
+      <td>投稿者：
+        <%= link_to admin_path(@post.admin.id) do %>
+          <%= @post.admin.name %>
+        <% end %>
+      </td>
+      <td>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></td>
+      <% if @post.admin == current_admin %>
+        <%= link_to "編集", edit_admin_post_path(@post.id) %>
+        <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <% end %>
+      <td><%= render "favorites/btn", post: @post %></td>
+      <td>コメント数: <%= @post.post_comments.count %></td>
+    </tr>
+  </table>
 
   <%= render "post_comments/index", post: @post %>
+
 </div>

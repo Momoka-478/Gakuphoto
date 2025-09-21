@@ -5,8 +5,21 @@
   <% end %>
 </div>
 
-<h2>いいねした投稿一覧</h2>
-
+<div>
+  <h2>いいねした投稿一覧</h2>
+  <% if @favorite_posts.any? %>
+    <% @favorite_posts.each do |post| %>
+      <div class="post">
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image %>
+        <% end %>
+        <p>タイトル：<%= post.title %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>まだいいねした投稿はありません。</p>
+  <% end %>
+</div>
 
 <% if user_signed_in? && @user == current_user %>
   <div>

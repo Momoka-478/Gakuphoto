@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'favorites/create'
+  get 'favorites/destroy'
   get 'admins/show'
   get 'searches/search'
   devise_for :admin, skip: [:registrations, :password], controllers: {
     sessions: 'admin/sessions'
   }
 
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:index, :show] do
+    resources :favorite, only: [:create, :destroy]
+  end
 
   resources :admins, only: [:index, :show]
 
