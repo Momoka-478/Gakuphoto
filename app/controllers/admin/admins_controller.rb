@@ -17,6 +17,7 @@ class Admin::AdminsController < ApplicationController
     redirect_to admin_path(admin.id)
   end
 
+  
   private
 
   def admin_params
