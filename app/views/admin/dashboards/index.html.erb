@@ -1,12 +1,33 @@
-<h1>全ユーザー一覧</h1>
-<ul>
-  <% @users.each do |user| %>
-    <li>
-      <%= link_to admin_user_path(user) do %>
-        <%= user.name %>
-      <% end %>
-       - <%= user.email %>
-      <%= link_to '退会', admin_user_path(user), method: :delete, data: { confirm: '本当に退会させますか？' } %> 
-    </li>
-  <% end %>
-</ul>
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">全ユーザー一覧</h1>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle shadow-sm">
+      <thead class="table-light">
+        <tr>
+          <th>名前</th>
+          <th>Email</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <%= link_to admin_user_path(user), class: "fw-bold text-decoration-none" do %>
+                <%= user.name %>
+              <% end %>
+            </td>
+            <td><%= user.email %></td>
+            <td>
+              <%= link_to '退会', admin_user_path(user),
+                          method: :delete,
+                          data: { confirm: '本当に退会させますか？' },
+                          class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

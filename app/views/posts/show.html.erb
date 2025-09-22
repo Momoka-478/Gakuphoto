@@ -1,19 +1,31 @@
-<div>
-  <%= image_tag @post.get_image %>
-  <p>タイトル：<%= @post.title %></p>
-  <p>一言：<%= @post.body %></p>
-  <p>投稿者：
-  <%= link_to admin_path(@post.admin.id) do %>
-    <%= @post.admin.name %>
-  <% end %>
-  </p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.admin == current_admin %>
-    <%= link_to "編集", edit_admin_post_path(@post.id) %>
-    <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
+<div class="container mt-4">
+  <%= render 'searches/form' %>
+  <div class="card shadow-sm">
+    <% if @post.get_image.present? %>
+      <%= image_tag @post.get_image, class: "card-img-top", alt: @post.title %>
+    <% end %>
+    <div class="card-body">
+      <h3 class="card-title"><%= @post.title %></h3>
+      <p class="card-text"><%= simple_format(@post.body) %></p>
 
-  <p>コメント数: <%= @post.post_comments.count %></p>
+      <p class="text-muted">
+        投稿者：
+        <%= link_to admin_path(@post.admin.id), class: "text-decoration-none" do %>
+          <%= @post.admin.name %>
+        <% end %>
+        ／ 投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %>
+      </p>
 
-  <%= render "post_comments/index", post: @post %>
+      <div class="d-flex align-items-center mb-3">
+        <div class="me-3">
+          <%= render "favorites/btn", post: @post %>
+        </div>
+        <span class="text-muted">コメント数: <%= @post.post_comments.count %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= render "post_comments/index", post: @post %>
+  </div>
 </div>

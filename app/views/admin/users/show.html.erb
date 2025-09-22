@@ -1,7 +1,36 @@
-<div>
-  <h3><%= @user.name %></h3>
+<div class="container mt-4">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title mb-0"><%= @user.name %></h3>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h4 class="mb-3">いいねした投稿一覧</h4>
+    <% if @favorite_posts.any? %>
+      <div class="row">
+        <% @favorite_posts.each do |post| %>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+              <%= link_to admin_post_path(post.id) do %>
+                <%= image_tag post.get_image, class: "card-img-top", alt: post.title %>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= post.title %></h5>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>まだいいねした投稿はありません。</p>
+    <% end %>
+  </div>
+
+  <div class="text-end">
+    <%= link_to "退会", admin_user_path(@user), 
+                class: "btn btn-outline-danger", 
+                method: :delete, 
+                data: { confirm: "本当に退会させますか？" } %>
+  </div>
 </div>
-
-<h2>いいねした投稿一覧</h2>
-
-<%= link_to '退会', admin_user_path(@user), method: :delete, data: { confirm: '本当に退会させますか？' } %> 

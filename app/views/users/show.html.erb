@@ -1,15 +1,46 @@
-<div>
-  <h3><%= @user.name %></h3>
+<div class="container mt-4">
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title mb-0"><%= @user.name %></h3>
+      <% if user_signed_in? && @user == current_user %>
+        <p class="mt-2">
+          <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-outline-primary btn-sm" %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <h4 class="mb-3">いいねした投稿一覧</h4>
+    <% if @favorite_posts.any? %>
+      <div class="row">
+        <% @favorite_posts.each do |post| %>
+          <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+              <%= link_to post_path(post.id) do %>
+                <%= image_tag post.get_image, class: "card-img-top", alt: post.title %>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title"><%= post.title %></h5>
+                <%= link_to post_favorite_path(post), method: :delete, class: "btn btn-danger btn-sm" do %>
+                  <i class="fas fa-heart"></i> いいね解除
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>まだいいねした投稿はありません。</p>
+    <% end %>
+  </div>
+
   <% if user_signed_in? && @user == current_user %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
+    <div class="text-end">
+      <%= link_to "退会", user_path(current_user.id), 
+                  class: "btn btn-outline-danger", 
+                  method: :delete, 
+                  data: { confirm: "本当に退会しますか？" } %>
+    </div>
   <% end %>
 </div>
-
-<h2>いいねした投稿一覧</h2>
-
-
-<% if user_signed_in? && @user == current_user %>
-  <div>
-    <%= link_to "退会",user_path(current_user.id), class: "destroy-user", method: :delete, "data-confirm" => "本当に退会しますか？" %>
-  </div>
-<% end %>

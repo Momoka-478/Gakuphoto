@@ -1,4 +1,11 @@
-<%= form_with model: [post, post_comment], url: admin_post_post_comments_path(post) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに", class: "w-100" %>
-  <%= f.submit "送信" %>
-<% end %>
+<div class="card my-4 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">コメントを投稿する</h5>
+    <%= form_with model: [post, post_comment], url: admin_post_post_comments_path(post), local: true do |f| %>
+      <div class="mb-3">
+        <%= f.text_area :comment, rows: 3, placeholder: "コメントをここに入力してください", class: "form-control" %>
+      </div>
+      <%= f.submit "送信", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

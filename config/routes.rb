@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     sessions: 'admin/sessions'
   }
 
-  resources :posts, only: [:index, :show]
+  resources :posts, only: [:index, :show] do
+    resource :favorite, only: [:create, :destroy]
+  end
 
   resources :admins, only: [:index, :show]
 
@@ -24,5 +26,6 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get 'about', to: 'homes#about', as: :about
   resources :users, only: [:show, :edit, :update, :destroy]
+ 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
