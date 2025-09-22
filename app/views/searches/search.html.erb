@@ -1,7 +1,18 @@
-<% if @model == 'admin' %>
-	<h3>Admins search for "<%= @content %>"</h3>
-  <%= render 'admins/index', admins: @records %>
-<% elsif @model == 'post' %>
-	<h3>Posts search for "<%= @content %>"</h3>
-  <%= render 'posts/index', posts: @records %>
-<% end %>
+<div class="container mt-5">
+  <% if @model == 'admin' %>
+    <h3 class="mb-4">「<span class="text-primary"><%= @content %></span>」の投稿者検索結果</h3>
+    <% if @records.any? %>
+      <%= render 'admins/index', admins: @records %>
+    <% else %>
+      <div class="alert alert-warning">該当する投稿者が見つかりませんでした。</div>
+    <% end %>
+
+  <% elsif @model == 'post' %>
+    <h3 class="mb-4">「<span class="text-primary"><%= @content %></span>」の投稿検索結果</h3>
+    <% if @records.any? %>
+      <%= render 'posts/index', posts: @records %>
+    <% else %>
+      <div class="alert alert-warning">該当する投稿が見つかりませんでした。</div>
+    <% end %>
+  <% end %>
+</div>

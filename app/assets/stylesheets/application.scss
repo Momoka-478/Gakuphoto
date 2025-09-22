@@ -1,111 +1,44 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
 
- * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
- }
-
- header {
-  width: 100%;
-  padding: 15px 0;
-  margin: 0 auto;
-  text-align: right;
-  background-color: darkgreen;
- }
-
- li {
-  list-style: none;
-  display: inline-block;
-  margin: 0 20px;
- }
-
- li > a {
-  color: rgb(250, 245, 232);
- }
-
- .top-photo {
+.top-photo {
   width: 100%;
   height: 100vh;
-  text-align: center;
   background-image: image-url('kousya.jpg');
   background-size: cover;
   background-position: center;
   position: relative;
- }
+}
 
- .top-text {
+.top-text {
   width: 100%;
   padding: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: rgba(2, 80, 2, 0.67);
-  position: absolute;
-  top: 35%;
-  left: 0;
   font-size: 3em;
   color: rgb(250, 245, 232);
- }
+}
 
- .about-main {
-  display: flex;
-  justify-content: center;
- }
-
- .about-photo {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 10px;
- }
-
- .about-photo-item1 {
+.about-photo-item1,
+.about-photo-item2,
+.about-photo-item3 {
   width: 100%;
   height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+
+.about-photo-item1 {
   background-image: image-url('24450359_s.jpg');
-  background-size: cover;
-  background-position: center;
- }
+}
 
- .about-photo-item2 {
-  width: 100%;
-  height: 250px;
+.about-photo-item2 {
   background-image: image-url('27701602_s.jpg');
-  background-size: cover;
-  background-position: center;
- }
+}
 
- .about-photo-item3 {
-  width: 100%;
-  height: 250px;
+.about-photo-item3 {
   background-image: image-url('32756855_s.jpg');
-  background-size: cover;
-  background-position: center;
- }
+}
 
- .about-text {
-  margin: 10px;
-  width: 80%;
-  height: 800px;
-  display: flex;
-  align-items: center;
-  font-size: 1.5em;
+.about-text {
+  font-size: 1.25rem;
   background-color: rgba(10, 70, 14, 0.413);
   color: rgb(250, 245, 232);
- }
+}
