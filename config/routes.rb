@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'favorites/create'
-  get 'favorites/destroy'
   get 'admins/show'
   get 'searches/search'
   devise_for :admin, skip: [:registrations, :password], controllers: {
@@ -9,7 +7,7 @@ Rails.application.routes.draw do
   }
 
   resources :posts, only: [:index, :show] do
-    resources :favorite, only: [:create, :destroy]
+    resource :favorite, only: [:create, :destroy]
   end
 
   resources :admins, only: [:index, :show]
@@ -28,5 +26,6 @@ Rails.application.routes.draw do
   root to: "homes#top"
   get 'about', to: 'homes#about', as: :about
   resources :users, only: [:show, :edit, :update, :destroy]
+ 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

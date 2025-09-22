@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
   belongs_to :admin
 
   validates :title, presence: true
@@ -18,6 +19,10 @@ class Post < ApplicationRecord
     else
       Post.where('title LIKE ?', '%'+content+'%')
     end
+  end
+
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
   end
 
   def get_image
