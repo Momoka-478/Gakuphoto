@@ -1,20 +1,30 @@
-<table>
-  <tbody>
-      <% post.post_comments.each do |post_comment| %>
-      <tr>
-        
-        <td>
-          <%= link_to admin_admin_path(post_comment.admin) do %>
-            <%= post_comment.admin.name %>
-          <% end %>
-        </td>
-        <td><%= post_comment.comment %></td>
-        <td>
-          <% if post_comment.admin == current_admin %>
-            <%= link_to "Destroy", admin_post_post_comment_path(post, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-  </tbody>
-</table>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title mb-3">コメント一覧</h5>
+    <% if post.post_comments.any? %>
+      <ul class="list-group list-group-flush">
+        <% post.post_comments.each do |post_comment| %>
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+              <strong>
+                <%= link_to admin_path(post_comment.admin), class: "text-decoration-none" do %>
+                  <%= post_comment.admin.name %>
+                <% end %>
+              </strong>
+              <p class="mb-1"><%= post_comment.comment %></p>
+            </div>
+            <% if post_comment.admin == current_admin %>
+              <%= link_to "削除", 
+                          post_post_comment_path(post, post_comment), 
+                          method: :delete, 
+                          data: { confirm: "本当に削除しますか？" }, 
+                          class: "btn btn-sm btn-outline-danger" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">まだコメントはありません。</p>
+    <% end %>
+  </div>
+</div>

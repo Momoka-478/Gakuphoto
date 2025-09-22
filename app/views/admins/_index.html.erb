@@ -1,6 +1,12 @@
-<% admins.each do |admin| %>
-  <tr>
-    <td><%= admin.name %></td>
-    <td><%= link_to 'Show', admin, class: "admin_#{admin.id}" %></td>
-  </tr>
-<% end %>
+<div class="row">
+  <% admins.each do |admin| %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold"><%= admin.name %></h5>
+          <%= link_to "詳細を見る", admin_path(admin), class: "btn btn-outline-primary btn-sm mt-2" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

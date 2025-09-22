@@ -1,19 +1,27 @@
-<table>
+<div class="row">
   <% posts.each do |post| %>
-    <tr>
-      <td><%= link_to post_path(post.id) do %>
-        <%= image_tag post.get_image %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image, class: "card-img-top", alt: post.title %>
         <% end %>
-      </td>
-      <td>タイトル：<%= post.title %></td>
-      <td>一言：<%= post.body %></td>
-      <td>投稿者：
-        <%= link_to admin_path(post.admin.id) do %>
-          <%= post.admin.name %>
-        <% end %>
-      </td>
-      <td><%= render "favorites/btn", post: post %></td>
-      <td>コメント数: <%= post.post_comments.count %></td>
-    </tr>
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text text-muted"><%= truncate(post.body, length: 60) %></p>
+          <p class="card-text">
+            投稿者：
+            <%= link_to admin_path(post.admin.id), class: "text-decoration-none" do %>
+              <%= post.admin.name %>
+            <% end %>
+          </p>
+          <p class="card-text">
+            コメント数: <%= post.post_comments.count %>
+          </p>
+        </div>
+        <div class="card-footer bg-white">
+          <%= render "favorites/btn", post: post %>
+        </div>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>

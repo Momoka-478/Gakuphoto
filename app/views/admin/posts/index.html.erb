@@ -1,15 +1,26 @@
-<% @posts.each do |post| %>
-  <div>
-  <%= link_to admin_post_path(post.id) do %>
-    <%= image_tag post.get_image %>
-  <% end %>
-    <p>タイトル：<%= post.title %></p>
-    <p>一言：<%= post.body %></p>
-    <p>投稿者：
-      <%= link_to admin_admin_path(post.admin.id) do %>
-        <%= post.admin.name %>
-      <% end %>
-    </p>
-    <p>コメント数: <%= post.post_comments.count %></p>
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">投稿一覧</h2>
+
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          <%= link_to admin_post_path(post.id), class: "text-decoration-none text-dark" do %>
+            <%= image_tag post.get_image, class: "card-img-top", alt: post.title %>
+            <div class="card-body">
+              <h5 class="card-title"><%= post.title %></h5>
+              <p class="card-text"><%= truncate(post.body, length: 50) %></p>
+            </div>
+          <% end %>
+          <div class="card-footer text-muted small">
+            投稿者：
+            <%= link_to admin_admin_path(post.admin.id), class: "fw-bold text-decoration-none" do %>
+              <%= post.admin.name %>
+            <% end %><br>
+            コメント数: <%= post.post_comments.count %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
