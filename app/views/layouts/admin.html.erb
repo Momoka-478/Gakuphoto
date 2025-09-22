@@ -9,29 +9,26 @@
   </head>
   <body>
     <header>
+    <% if admin_signed_in? %>
       <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f4f4f;">
         <div class="container-fluid">
-          <a class="navbar-brand" href="<%= root_path %>">Gakuphoto</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#userNavbar" aria-controls="userNavbar" aria-expanded="false" aria-label="Toggle navigation">
+          <a class="navbar-brand" href="<%= admin_posts_path %>">Gakuphoto Admin</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse" id="userNavbar">
+          <div class="collapse navbar-collapse" id="adminNavbar">
             <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><%= link_to "ホーム", root_path, class: "nav-link text-white" %></li>
-              <li class="nav-item"><%= link_to "アバウト", about_path, class: "nav-link text-white" %></li>
-              <% if user_signed_in? %>
-                <li class="nav-item"><%= link_to "マイページ", user_path(current_user.id), class: "nav-link text-white" %></li>
-                <li class="nav-item"><%= link_to "投稿一覧", posts_path, class: "nav-link text-white" %></li>
-                <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-white" %></li>
-              <% else %>
-                <li class="nav-item"><%= link_to "新規登録", new_user_registration_path, class: "nav-link text-white" %></li>
-                <li class="nav-item"><%= link_to "ログイン", new_user_session_path, class: "nav-link text-white" %></li>
-              <% end %>
+              <li class="nav-item"><%= link_to '投稿フォーム', new_admin_post_path, class: "nav-link text-white" %></li>
+              <li class="nav-item"><%= link_to '投稿一覧', admin_posts_path, class: "nav-link text-white" %></li>
+              <li class="nav-item"><%= link_to 'マイページ', admin_admin_path(current_admin.id), class: "nav-link text-white" %></li>
+              <li class="nav-item"><%= link_to 'ユーザー情報', admin_dashboards_path, class: "nav-link text-white" %></li>
+              <li class="nav-item"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: "nav-link text-white" %></li>
             </ul>
           </div>
         </div>
       </nav>
+    <% end %>
     </header>
 
     <div class="container mt-3">

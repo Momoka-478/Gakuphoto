@@ -14,7 +14,7 @@ class Admin::AdminsController < ApplicationController
   def update
     @admin = Admin.find(params[:id])
     @admin.update(admin_params)
-    redirect_to admin_path(admin.id)
+    redirect_to admin_admin_path(current_admin.id)
   end
 
   
