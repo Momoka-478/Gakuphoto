@@ -6,6 +6,8 @@ class Post < ApplicationRecord
   has_many :favorited_users, through: :favorites, source: :user
   belongs_to :admin
 
+  scope :recent, -> { order(created_at: :desc) }
+
   validates :title, presence: true
   validates :image, presence: true
 

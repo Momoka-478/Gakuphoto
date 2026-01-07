@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   def show
     @user = current_user
-    @favorite_posts = @user.favorite_posts
+    @favorite_posts = @user.favorite_posts.recent
   end
 
   def edit
