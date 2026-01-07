@@ -10,21 +10,24 @@
     </div>
   </div>
 
-  <div class="row">
-    <% @posts.each do |post| %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100 shadow-sm">
-          <%= link_to post_path(post.id), class: "text-decoration-none text-dark" do %>
-            <% if post.get_image.present? %>
-              <%= image_tag post.get_image, class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
-            <% end %>
-            <div class="card-body">
-              <h5 class="card-title"><%= post.title %></h5>
-              <p class="card-text text-truncate"><%= post.body %></p>
-            </div>
-          <% end %>
+<div class="row">
+  <% @posts.each do |post| %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <%= link_to post_path(post.id) do %>
+          <%= image_tag post.get_image, class: "card-img-top", alt: post.title %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text text-muted"><%= truncate(post.body, length: 60) %></p>
+          <p class="card-text">
+            コメント数: <%= post.post_comments.count %>
+          </p>
+        </div>
+        <div class="card-footer bg-white">
+          <%= render "favorites/btn", post: post %>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
