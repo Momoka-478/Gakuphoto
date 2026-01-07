@@ -2,6 +2,15 @@
   <%= render 'searches/form' %>
   <div class="row justify-content-center">
     <div class="col-md-8">
+      <% if @post_comment.errors.any? %>
+        <div class="error-messages">
+          <ul>
+            <% @post_comment.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="card shadow-sm">
         <%= image_tag @post.get_image, class: "card-img-top", alt: @post.title %>
 
